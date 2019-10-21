@@ -1,0 +1,100 @@
+1、新建JAVA项目
+
+2、导入MyBatis的依赖jar包
+	mybatis-3.2.7.jar
+	classes12.jar
+
+3、创建SqlMapConfig.xml 全局配置文件，配置数据源、事务等mybatis运行环境
+	<?xml version="1.0" encoding="UTF-8"?>
+	<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+	<configuration>
+		<!-- 加载外部配置文档 -->
+		<properties resource="db.properties"></properties>
+		
+		<!-- 环境 -->
+		<environments default="development">
+			<environment id="development">
+			
+				<!-- 事务管理 ：JDBC、MANAGED(托管)-->
+				<transactionManager type="JDBC" />
+				
+				<!-- 数据源： POOLED、UNPOOLED、JNDI-->
+				<dataSource type="POOLED">
+					<property name="driver" value="${jdbc.driverClassName}" />
+					<property name="url" value="${jdbc.url}" />
+					<property name="username" value="${jdbc.username}" />
+					<property name="password" value="${jdbc.password}" />
+				</dataSource>
+				
+			</environment>
+		</environments>
+		<mappers>
+			<mapper resource="com/neuedu/dao/EmpMapper.xml" />
+		</mappers>
+	</configuration>
+	
+	★★★★★★★★★★★★★在src下新建db.properties，配置数据库连接信息★★★★★★★★★★★★★
+	jdbc.driverClassName =  oracle.jdbc.driver.OracleDriver
+	jdbc.url = jdbc:oracle:thin:@localhost:1521:orcl
+	jdbc.username = scott
+	jdbc.password = tiger
+	
+4、创建mapper.xml映射文件，配置增、删、改、查的SQL语句。
+	<?xml version="1.0" encoding="UTF-8"?>
+	<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="org.mybatis.example.BlogMapper">
+	
+		<!-- 
+			<select>:定义查询SQL语句
+				id：SQL语句的唯一标识符
+				parameterType:参数类型
+				resultType：返回值类型
+		 -->
+		<select id="selectEmpByEmpno" parameterType="int" resultType="com.neuedu.pojo.Emp">
+			select * from emp where empno = #{empno}
+		</select>
+		
+	</mapper>
+
+6.定义DAO层接口与实现类
+	//-------------------------------------IEmpDao.java-------------------------
+	public interface IEmpDao {
+		public Emp selectEmpByEmpno(int empno);
+	}
+	//-------------------------------------EmpDaoImpl.java-------------------------
+	public class EmpDaoImpl implements IEmpDao {
+	
+		private SqlSessionFactory factory;
+		
+		public EmpDaoImpl(SqlSessionFactory factory)
+		{
+			this.factory = factory;
+		}
+		
+		@Override
+		public Emp selectEmpByEmpno(int empno) {
+			//1.获取SqlSessionFactory接口
+			//SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("sqlMapConfig.xml"));
+			
+			//2.获取SqlSession接口
+			SqlSession session = factory.openSession();
+			
+			//3.执行查询     参数一：SQL语句的id属性值    参数二：查询语句需要的参数parameterType
+			Emp emp = (Emp)session.selectOne("selectEmpByEmpno", empno);
+		
+			//4.关闭连接
+			session.close();
+			
+			return emp;
+		}
+	}
+
+5、测试
+	//1.获取SqlSessionFactory接口
+	SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("sqlMapConfig.xml"));
+	
+	IEmpDao empDao = new EmpDaoImpl(factory);
+	
+	//查询
+	Emp emp = empDao.selectEmpByEmpno(7788);
+	System.out.println(emp);

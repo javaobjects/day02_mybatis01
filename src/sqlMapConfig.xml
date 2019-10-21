@@ -3,7 +3,7 @@
 <configuration>
 	<!-- 加载外部配置文档 :优先读取<property>节点中的值，再读取resource属性指向的文件，如果同时存在name属性值相同的配置，后者将覆盖前者-->
 	<properties resource="db.properties">
-		<property name="jdbc.password" value="123456"/>
+		<property name="jdbc.password" value="scott123"/>
 	</properties>
 	
 	<!-- 全局参数：例如二级缓存、延迟加载 -->

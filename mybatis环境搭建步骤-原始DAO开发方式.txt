@@ -29,7 +29,7 @@
 			</environment>
 		</environments>
 		<mappers>
-			<mapper resource="com/neuedu/dao/EmpMapper.xml" />
+			<mapper resource="com/tencent/dao/EmpMapper.xml" />
 		</mappers>
 	</configuration>
 	
@@ -50,7 +50,7 @@
 				parameterType:参数类型
 				resultType：返回值类型
 		 -->
-		<select id="selectEmpByEmpno" parameterType="int" resultType="com.neuedu.pojo.Emp">
+		<select id="selectEmpByEmpno" parameterType="int" resultType="com.tencent.pojo.Emp">
 			select * from emp where empno = #{empno}
 		</select>
 		

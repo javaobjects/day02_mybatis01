@@ -1,4 +1,4 @@
-package com.neuedu.pojo;
+package com.tencent.pojo;
 
 public class Emp {
 

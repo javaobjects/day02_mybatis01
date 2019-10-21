@@ -3,7 +3,7 @@ package com.tencent.dao;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-import com.neuedu.pojo.Emp;
+import com.tencent.pojo.Emp;
 
 public class EmpDaoImpl implements IEmpDao {
 	

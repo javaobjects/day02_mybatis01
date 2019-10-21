@@ -1,4 +1,4 @@
-package com.neuedu.test;
+package com.tencent.test;
 
 import java.io.IOException;
 
@@ -6,9 +6,9 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import com.neuedu.pojo.Emp;
 import com.tencent.dao.EmpDaoImpl;
 import com.tencent.dao.IEmpDao;
+import com.tencent.pojo.Emp;
 
 public class Test {
 

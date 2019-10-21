@@ -17,7 +17,7 @@
 		<insert>:定义新增SQL语句（executeUpdate）
 			默认返回值为影响行数int，不需要定义返回值类型
 	 -->
-	 <insert id="insertEmp" parameterType="com.neuedu.pojo.Emp">
+	 <insert id="insertEmp" parameterType="com.tencent.pojo.Emp">
 	 	insert into emp(empno,ename,job) values(seq_emp.nextval,#{ename},#{job})
 	 	
 	 	<!-- 
@@ -33,7 +33,7 @@
 		<update>:定义修改SQL语句
 			默认返回值为影响行数int，不需要定义返回值类型
 	 -->
-	 <update id="updateEmp" parameterType="com.neuedu.pojo.Emp">
+	 <update id="updateEmp" parameterType="com.tencent.pojo.Emp">
 	 		update emp set ename = #{ename} where empno=#{empno}
 	 </update>
 	 

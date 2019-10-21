@@ -1,6 +1,6 @@
 package com.tencent.dao;
 
-import com.neuedu.pojo.Emp;
+import com.tencent.pojo.Emp;
 
 public interface IEmpDao {
 	

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE configuration>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<!-- 加载外部配置文档 :优先读取<property>节点中的值，再读取resource属性指向的文件，如果同时存在name属性值相同的配置，后者将覆盖前者-->
 	<properties resource="db.properties">
